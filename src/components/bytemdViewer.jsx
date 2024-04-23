@@ -1,5 +1,5 @@
 import gfm from "@bytemd/plugin-gfm";
-import { Editor, Viewer } from "@bytemd/react";
+import { Viewer } from "@bytemd/react";
 import { useState } from "react";
 import "bytemd/dist/index.css";
 import "../styles/bytemd.css";
@@ -9,11 +9,11 @@ const plugins = [
   // Add more plugins here
 ];
 
-function Bytemd() {
+function BytemdViewer() {
   const [value, setValue] = useState("");
 
   return (
-    <Editor
+    <Viewer
       value={value}
       plugins={plugins}
       onChange={(v) => {
@@ -23,4 +23,4 @@ function Bytemd() {
   );
 }
 
-export default Bytemd;
+export default BytemdViewer;
