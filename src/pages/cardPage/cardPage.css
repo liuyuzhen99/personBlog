@@ -1,26 +1,53 @@
-.top-bar {
-    display: flex;
-    height: 10%;
-    justify-content: space-between;
+input {
+    width: auto;
 }
 
-.cardPage {
-    width: 100vw;
+.bytemd-right {
+    width: 70vw;
     height: 100vh;
 }
 
-body {
-    margin: 0;
-    padding: 0;
+.bytemd-navbar {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #bbb;
 }
 
-.edit-btn {
-    padding: 5px;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: green;
-    visibility: visible;
-    opacity: 1;
+.bytemd{
+    width: 100%;
+    height: 90vh;
+}
+
+.bytemd-status-right {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.bytemd-viewer {
+    /* display: flex;
+    justify-content: center; */
+    overflow-y: auto;
+    height: 90vh;
+}
+
+.markdown-body {
+    margin: 100px;
+}
+
+.editMode-navbar,
+.uneditMode-navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-box {
+    width: 200px;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-around;
 }
