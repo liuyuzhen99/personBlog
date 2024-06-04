@@ -56,3 +56,35 @@ input {
     display: flex;
     flex-direction: row;
 }
+
+input {
+    position: relative;
+    width: 100%;
+    outline: none;
+    padding: 0 30px;
+    line-height: 80px;
+    border-radius: 10px;
+    border: 2px solid rgb(42, 42, 213);
+    margin-right: 10px;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+}
+
+.tag-n-close-btn-list,
+.tag-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.tag-n-close-btn,
+.tag {
+    background-color: bisque;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 0 8px;
+    border-radius: 5px;
+    align-items: center;
+}

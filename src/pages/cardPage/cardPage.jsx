@@ -6,6 +6,7 @@ import { useState } from "react";
 // import { MdCancelPresentation } from "react-icons/md";
 // import { GiConfirmed } from "react-icons/gi";
 import { Viewer, Editor } from "@bytemd/react";
+import { CgClose } from "react-icons/cg";
 import "bytemd/dist/index.css";
 import "github-markdown-css";
 import "./cardPage.css";
@@ -15,7 +16,7 @@ function cardPage() {
   const [previousContent, setPreviousContent] = useState("");
   const [editMode, setEditMode] = useState(true);
   const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(new Set());
 
   const handleEdit = () => {
     setEditMode(true);
@@ -41,13 +42,20 @@ function cardPage() {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
-      setTags([...tags, inputValue.trim()]);
+      if (tags.size < 3) {
+        setTags(new Set([...tags, inputValue.trim()]));
+      } else {
+        alert("最多可以添加三个标签");
+      }
+
       setInputValue("");
     }
   };
 
-  const removeTag = (indexToRemove) => {
-    setTags(tags.filter((_, index) => index !== indexToRemove));
+  const removeTag = (tag) => {
+    const updatedTags = new Set(tags);
+    updatedTags.delete(tag);
+    setTags(updatedTags);
   };
 
   return (
@@ -57,32 +65,29 @@ function cardPage() {
           <div className="editMode-navbar">
             <div className="tag-box">
               <input
-                className="tag-input"
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 placeholder="添加标签..."
               />
-              {tags.map((tag, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginRight: "8px",
-                  }}
-                >
-                  <span>{tag}</span>
-                  <button
-                    className="tag-remove-btn"
-                    onClick={() => removeTag(index)}
-                    style={{ marginLeft: "4px" }}
+              <div className="tag-n-close-btn-list">
+                {[...tags].map((tag, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginRight: "8px",
+                    }}
                   >
-                    x
-                  </button>
-                </div>
-              ))}
+                    <div className="tag-n-close-btn">
+                      <span>{tag}</span>
+                      <CgClose onClick={() => removeTag(tag)} />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="btn-box">
               <button onClick={handleSave}>确定</button>
@@ -92,18 +97,20 @@ function cardPage() {
         ) : (
           <div className="uneditMode-navbar">
             <div className="tag-box">
-              {tags.map((tag, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginRight: "8px",
-                  }}
-                >
-                  <span>{tag}</span>
-                </div>
-              ))}
+              <div className="tag-list">
+                {[...tags].map((tag, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginRight: "8px",
+                    }}
+                  >
+                    <span className="tag">{tag}</span>
+                  </div>
+                ))}
+              </div>
             </div>
             <button onClick={handleEdit}>编辑</button>
           </div>
